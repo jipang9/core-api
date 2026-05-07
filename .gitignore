@@ -38,3 +38,25 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### Secrets / Local Config ###
+*.yml
+*.yaml
+*.properties
+*.env
+.env
+.env.*
+application.yml
+application.yaml
+application-*.yml
+application-*.yaml
+bootstrap.yml
+bootstrap.yaml
+bootstrap-*.yml
+bootstrap-*.yaml
+
+### QueryDSL generated Q files ###
+**/Q*.java
+**/Q*.kt
+**/generated/**
+**/build/generated/**
