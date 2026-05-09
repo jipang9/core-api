@@ -1,6 +1,8 @@
 package mobility.core.outbox.domain
 
 import jakarta.persistence.*
+import mobility.core.outbox.domain.enums.AggregateType
+import mobility.core.outbox.domain.enums.EventType
 import mobility.core.outbox.domain.enums.OutboxStatus
 import java.time.LocalDateTime
 import java.util.*
@@ -17,14 +19,16 @@ class OutboxEvent (
     @Column(nullable = false, unique = true)
     val eventId: String = UUID.randomUUID().toString(),
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val aggregateType: String,
+    val aggregateType: AggregateType,
 
     @Column(nullable = false)
     val aggregateId: String,
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val eventType: String,
+    val eventType: EventType,
 
     @Lob
     @Column(nullable = false, columnDefinition = "TEXT")
