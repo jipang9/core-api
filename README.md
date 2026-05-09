@@ -107,7 +107,7 @@ Transaction
 After the transaction commits successfully,
 a relay scheduler publishes pending OutboxEvents to Kafka.
 
----
+--
 
 # Kafka Delivery Guarantee
 
