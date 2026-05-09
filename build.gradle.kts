@@ -1,8 +1,12 @@
 plugins {
-	kotlin("jvm") version "2.2.21"
-	kotlin("plugin.spring") version "2.2.21"
-	id("org.springframework.boot") version "3.5.7"
+	kotlin("jvm") version "2.1.21"
+	kotlin("plugin.spring") version "2.1.21"
+	kotlin("plugin.jpa") version "2.1.21"
+
+	id("org.springframework.boot") version "3.4.5"
 	id("io.spring.dependency-management") version "1.1.7"
+
+	jacoco
 }
 
 group = "mobility"
@@ -22,7 +26,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
 	implementation("org.springframework.kafka:spring-kafka")
+
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -30,14 +36,20 @@ dependencies {
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+	testImplementation(platform("org.testcontainers:testcontainers-bom:1.19.8"))
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
+
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("org.testcontainers:mysql")
 	testImplementation("org.testcontainers:kafka")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+jacoco {
+	toolVersion = "0.8.11"
 }
 kotlin {
 
@@ -56,4 +68,19 @@ allOpen {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+
+tasks.test {
+	useJUnitPlatform()
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+	}
 }
