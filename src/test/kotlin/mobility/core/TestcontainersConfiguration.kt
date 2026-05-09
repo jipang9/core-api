@@ -1,4 +1,4 @@
-package mobility.core_api
+package mobility.core
 
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection

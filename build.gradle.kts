@@ -9,7 +9,7 @@ plugins {
 	jacoco
 }
 
-group = "mobility"
+group = "com.mobility"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -48,15 +48,16 @@ dependencies {
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
-jacoco {
-	toolVersion = "0.8.11"
-}
+
 kotlin {
 
 	jvmToolchain(17)
 
 	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
+		freeCompilerArgs.addAll(
+			"-Xjsr305=strict",
+			"-Xannotation-default-target=param-property"
+		)
 	}
 }
 
@@ -66,21 +67,21 @@ allOpen {
 	annotation("jakarta.persistence.Embeddable")
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
-
-
 tasks.test {
 	useJUnitPlatform()
 	finalizedBy(tasks.jacocoTestReport)
 }
 
 tasks.jacocoTestReport {
+
 	dependsOn(tasks.test)
 
 	reports {
 		xml.required.set(true)
 		html.required.set(true)
 	}
+}
+
+jacoco {
+	toolVersion = "0.8.11"
 }

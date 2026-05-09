@@ -1,4 +1,4 @@
-package mobility.core_api
+package mobility.core
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

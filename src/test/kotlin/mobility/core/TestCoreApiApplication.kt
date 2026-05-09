@@ -1,4 +1,4 @@
-package mobility.core_api
+package mobility.core
 
 import org.springframework.boot.fromApplication
 import org.springframework.boot.with

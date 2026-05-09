@@ -1,1 +1,1 @@
-rootProject.name = "core-api"
+rootProject.name = "mobility-core-platform"
