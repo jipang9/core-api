@@ -1,10 +1,10 @@
 plugins {
-	kotlin("jvm") version "2.1.21"
-	kotlin("plugin.spring") version "2.1.21"
-	kotlin("plugin.jpa") version "2.1.21"
+	kotlin("jvm") version "1.9.24"
+	kotlin("plugin.spring") version "1.9.24"
+	kotlin("plugin.jpa") version "1.9.24"
 
-	id("org.springframework.boot") version "3.4.5"
-	id("io.spring.dependency-management") version "1.1.7"
+	id("org.springframework.boot") version "3.3.5"
+	id("io.spring.dependency-management") version "1.1.6"
 
 	jacoco
 }
@@ -26,6 +26,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
 
 	implementation("org.springframework.kafka:spring-kafka")
 
