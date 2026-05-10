@@ -1,5 +1,6 @@
 package mobility.core.outbox.application
 
+import mobility.core.kafka.config.KafkaTopics
 import mobility.core.kafka.producer.ReservationEventProducer
 import mobility.core.outbox.domain.enums.OutboxStatus
 import org.slf4j.LoggerFactory
@@ -20,7 +21,7 @@ class OutboxRelayService(
         pendingEvents.forEach { event ->
             try {
                 reservationEventProducer.publish(
-                    topic = "reservation.created",
+                    topic = KafkaTopics.RESERVATION_CREATED,
                     key = event.aggregateId,
                     payload = event.payload
                 )
