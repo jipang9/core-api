@@ -19,6 +19,17 @@ class OutboxRelayService(
         var pendingEvents = outboxEventFinder.getEventsBy(OutboxStatus.PENDING)
 
         pendingEvents.forEach { event ->
+
+            if (event.retryCount >= 3) {
+
+                log.error(
+                    "Retry exceeded. eventId={}",
+                    event.eventId
+                )
+
+                return@forEach
+            }
+
             try {
                 reservationEventProducer.publish(
                     topic = KafkaTopics.RESERVATION_CREATED,

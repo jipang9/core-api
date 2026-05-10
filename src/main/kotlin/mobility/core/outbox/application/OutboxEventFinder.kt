@@ -11,6 +11,12 @@ class OutboxEventFinder (
 ){
 
     fun getEventsBy(status: OutboxStatus): List<OutboxEvent> {
-        return  outboxEventRepository.findAllByStatus(OutboxStatus.PENDING)
+        return  outboxEventRepository.findAllByStatusIn(
+            listOf(
+                OutboxStatus.PENDING,
+                OutboxStatus.FAILED
+            )
+        )
     }
+
 }
