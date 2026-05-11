@@ -45,8 +45,10 @@ class OutboxEvent (
     var publishedAt: LocalDateTime? = null,
 
     // 사용처 : kafka 발행 실패 원인 추적
+    @Column(nullable = false)
+    var retryCount : Int =0,
     @Column
-    var failureReason: String? = null,
+    var failedReason: String? = null,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +62,7 @@ class OutboxEvent (
 
     fun markFailed(reason: String) {
         status = OutboxStatus.FAILED
-        failureReason = reason
+        failedReason = reason
+        retryCount++
     }
 }
